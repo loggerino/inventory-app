@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const BrandSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
-    Year: { type: Number, required: true },
+    year: { type: Number, required: true },
 });
 
 BrandSchema.virtual("url").get(function () {
