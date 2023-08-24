@@ -18,6 +18,6 @@ exports.index = asyncHandler(async (req, res) => {
         title: 'Inventory App Home',
         categoryCount: numCategories,
         brandCount: numBrands,
-        itemCount: numBrands,
+        itemCount: numItems,
     });
 });
