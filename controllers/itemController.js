@@ -5,10 +5,10 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 exports.listItem = asyncHandler(async (req, res, next) => {
-    const allItems = await Item.find({}, "name price stock")
+    const allItems = await Item.find({}, "name price stock image")
         .sort({ name: 1 })
         .populate("price")
-        .populate("stock");
+        .populate("stock")
 
     res.render("item_list", { title: "Item List", listItem: allItems });
 });
@@ -46,6 +46,7 @@ exports.itemCreatePost = [
     body("category", "Price must be a valid number").trim().isLength({ min: 1 }).escape(),
     body("brand", "Price must be a valid number").trim().isLength({ min: 1 }).escape(),
     body("stock", "Stock must be a valid number").isNumeric(),
+    body("image", "Must be valid image").trim().optional(),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
         const item = new Item({
@@ -55,6 +56,7 @@ exports.itemCreatePost = [
             category: req.body.category,
             brand: req.body.brand,
             stock: req.body.stock,
+            image: req.file.filename,
             _id: req.params.id,
         });
         if (!errors.isEmpty()) {
@@ -104,6 +106,7 @@ exports.itemUpdatePost = [
     body("category", "Category must be selected").trim().isLength({ min: 1 }).escape(),
     body("brand", "Brand must be selected").trim().isLength({ min: 1 }).escape(),
     body("stock", "Stock must be a valid number").isNumeric(),
+    body("image", "Must be valid image").trim().optional({ checkFalsy: true }),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
         const item = new Item({
@@ -113,6 +116,7 @@ exports.itemUpdatePost = [
             category: req.body.category,
             brand: req.body.brand,
             stock: req.body.stock,
+            image: req.file.filename,
             _id: req.params.id,
         });
 
