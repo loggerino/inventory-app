@@ -4,6 +4,8 @@ block content
   h1= title
   h3 Category: #{category.name}
   h3 Description: #{category.description}
+  a(href=category.url + '/update') Update Category
+  a(href=category.url+'/delete') Delete Category
   hr
   h4 Items
   dl

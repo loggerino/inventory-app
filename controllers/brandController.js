@@ -18,7 +18,7 @@ exports.brandDetail = asyncHandler(async (req, res, next) => {
     ]);
 
     if (brand === null) {
-        const err = new Error("Category not found");
+        const err = new Error("Brand not found");
         err.status = 404;
         return next(err);
     }
@@ -48,8 +48,7 @@ exports.brandCreatePost = [
         if (!errors.isEmpty()) {
             res.render("brand_form", {
                 title: "Create New Brand",
-                description: description,
-                year: year,
+                brand: brand,
             });
             return;
         } else {
@@ -63,7 +62,7 @@ exports.brandUpdateGet = asyncHandler(async (req, res, next) => {
     const brand = await Brand.findById(req.params.id).populate('name').populate('description').populate('year');
 
     if (brand === null) {
-        const err = new Error("Category not found");
+        const err = new Error("Brand not found");
         err.status = 404;
         return next(err);
     }
@@ -89,8 +88,7 @@ exports.brandUpdatePost = [
         if (!errors.isEmpty()) {
             res.render("brand_form", {
                 title: "Create New Brand",
-                description: description,
-                year: year,
+                brand: brand,
             });
             return;
         } else {
