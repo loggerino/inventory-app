@@ -1,4 +1,6 @@
 const Item = require('../models/item');
+const Category = require('../models/category');
+const Brand = require('../models/brand');
 const asyncHandler = require("express-async-handler");
 
 exports.listItem = asyncHandler(async (req, res, next) => {
@@ -11,7 +13,17 @@ exports.listItem = asyncHandler(async (req, res, next) => {
 });
 
 exports.itemDetail = asyncHandler(async (req, res, next) => {
-    res.send(`NOT IMPLEMENTED: Item Detail: ${req.params.id}`);
+    const item = await Item.findById(req.params.id)
+        .populate('category')
+        .populate('brand')
+
+    if (item === null) {
+        const err = new Error('Item not found');
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render('item_detail', { title: 'Item Detail', item });
 });
 
 exports.itemCreateGet = asyncHandler(async (req, res, next) => {

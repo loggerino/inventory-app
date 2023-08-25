@@ -1,4 +1,5 @@
 const Brand = require('../models/brand');
+const Item = require('../models/item');
 const asyncHandler = require("express-async-handler");
 
 exports.listBrand = asyncHandler(async (req, res, next) => {
@@ -10,7 +11,22 @@ exports.listBrand = asyncHandler(async (req, res, next) => {
 });
 
 exports.brandDetail = asyncHandler(async (req, res, next) => {
-    res.send(`NOT IMPLEMENTED: Brand Detail: ${req.params.id}`);
+    const [brand, itemsInBrand] = await Promise.all([
+        Brand.findById(req.params.id),
+        Item.find({ brand: req.params.id }, "name description"),
+    ]);
+
+    if (brand === null) {
+        const err = new Error("Category not found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("brand_detail", {
+        title: "Brand Detail",
+        brand: brand,
+        brand_items: itemsInBrand,
+    });
 });
 
 exports.brandCreateGet = asyncHandler(async (req, res, next) => {

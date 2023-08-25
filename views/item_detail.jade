@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  div
+    h2= item.name
+    p Description: #{item.description}
+    p Price: $#{item.price}
+    p Stock: #{item.stock}
+    if item.size && item.size.length > 0
+      p Sizes: #{item.size.join(', ')}
+    p Category: #{item.category.name}
+    p Brand: #{item.brand.name}

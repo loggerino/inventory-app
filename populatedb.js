@@ -20,8 +20,8 @@ async function main() {
     await mongoose.connect(mongoDB);
     console.log("Debug: Should be connected?");
     await createCategories();
-    await createItems();
     await createBrands();
+    await createItems();
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
 }
