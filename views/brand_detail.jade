@@ -5,13 +5,15 @@ block content
   h3 Brand: #{brand.name}
   h3 Description: #{brand.description}
   h3 Year Founded: #{brand.year}
+  a(href=brand.url + '/update') Update Brand
+  a(href=brand.url+'/delete') Delete Brand
   hr
   h4 Items
   dl
-      each item in brand_items
-        dt
-          a(href=item.url) #{item.name}
-        dd #{item.description}
+    each item in brand_items
+      dt
+        a(href=item.url) #{item.name}
+      dd #{item.description}
 
-      else
-        p This brand has no items
+    else
+      p This brand has no items
