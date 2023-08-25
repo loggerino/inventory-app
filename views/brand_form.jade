@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') Brand:
+      input#name.form-control(type='text', name='name' value=(undefined===brand ? '' : brand.name))
+      label(for='description') Description:
+      input#name.form-control(type='text', name='description' value=(undefined===brand ? '' : brand.description))
+      label(for='year') Year:
+      input#name.form-control(type='text', name='year' value=(undefined===brand ? '' : brand.year))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+   ul
+    for error in errors
+     li!= error.msg
