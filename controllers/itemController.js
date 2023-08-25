@@ -46,6 +46,10 @@ exports.itemCreatePost = [
     body("category", "Price must be a valid number").trim().isLength({ min: 1 }).escape(),
     body("brand", "Price must be a valid number").trim().isLength({ min: 1 }).escape(),
     body("stock", "Stock must be a valid number").isNumeric(),
+    body("size").custom((value) => {
+        const sizes = value.split(",").map((size) => size.trim());
+        return true;
+    }),
     body("image", "Must be valid image").trim().optional({ values: "falsy" }),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -60,6 +64,7 @@ exports.itemCreatePost = [
             category: req.body.category,
             brand: req.body.brand,
             stock: req.body.stock,
+            size: req.body.size.split(',').map(size => size.trim()),
             image: imageName,
             _id: req.params.id,
         });
@@ -110,6 +115,10 @@ exports.itemUpdatePost = [
     body("category", "Category must be selected").trim().isLength({ min: 1 }).escape(),
     body("brand", "Brand must be selected").trim().isLength({ min: 1 }).escape(),
     body("stock", "Stock must be a valid number").isNumeric(),
+    body("size").custom((value) => {
+        const sizes = value.split(",").map((size) => size.trim());
+        return true;
+    }),
     body("image", "Must be valid image").trim().optional({ values: "falsy" }),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -124,6 +133,7 @@ exports.itemUpdatePost = [
             category: req.body.category,
             brand: req.body.brand,
             stock: req.body.stock,
+            size: req.body.size.split(',').map(size => size.trim()),
             image: imageName,
             _id: req.params.id,
         });
