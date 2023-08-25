@@ -4,6 +4,8 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    if user
+      h1 WELCOME BACK #{user.username}
     ul
       li: a(href="/") Go Home 
       li: a(href='/inventory/items') View Items
@@ -12,4 +14,8 @@ html
       li: a(href='/inventory/item/create') Create Item
       li: a(href='/inventory/category/create') Create Category
       li: a(href='/inventory/brand/create') Create Brand
+    if isAuthenticated
+      li: a(href='/authentication/logout') Logout
+    else
+      li: a(href='/authentication/login') Login
     block content
