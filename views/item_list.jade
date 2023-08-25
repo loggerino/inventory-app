@@ -5,6 +5,6 @@ block content
   ul
     each item in listItem
       li
-        h2= item.name
+        a(href=item.url) #{item.name}
         p Price: #{item.price}
         p Stock: #{item.stock}

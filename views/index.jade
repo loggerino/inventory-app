@@ -3,14 +3,6 @@ extends layout
 block content
   h1= title
   p Welcome!
-  ul
-    li: a(href='/inventory/items') View Items
-    li: a(href='/inventory/categories') View Categories
-    li: a(href='/inventory/brands') View Brands
-    li: a(href='/inventory/item/create') Create Item
-    li: a(href='/inventory/category/create') Create Category
-    li: a(href='/inventory/brand/create') Create Brand
-
     h2 Inventory Counts
     p Total Items: #{itemCount}
     p Total Categories: #{categoryCount}
