@@ -2,7 +2,11 @@ const Brand = require('../models/brand');
 const asyncHandler = require("express-async-handler");
 
 exports.listBrand = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Brand list");
+    const allBrands = await Brand.find({}, "name description")
+        .sort({ name: 1 })
+        .populate("description");
+
+    res.render("brand_list", { title: "Brand List", listBrand: allBrands });
 });
 
 exports.brandDetail = asyncHandler(async (req, res, next) => {

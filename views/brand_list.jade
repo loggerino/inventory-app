@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  ul
+    each brand in listBrand
+      li
+        a(href=brand.url) #{brand.name}
+        p Description: #{brand.description}
