@@ -3,10 +3,10 @@ const asyncHandler = require("express-async-handler");
 
 exports.listCategories = asyncHandler(async (req, res, next) => {
     const allCategories = await Category.find({}, "name description")
-    .sort({ name: 1 })
-    .populate("description");
+        .sort({ name: 1 })
+        .populate("description");
 
-    res.render("category_list", { title: "Category List", listCategories: allCategories});
+    res.render("category_list", { title: "Category List", listCategories: allCategories });
 });
 
 exports.categoryDetail = asyncHandler(async (req, res, next) => {

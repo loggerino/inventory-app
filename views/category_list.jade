@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   ul
-    each category in listCategory
+    each category in listCategories
       li
         a(href=category.url) #{category.name}
         p Category: #{category.description}
