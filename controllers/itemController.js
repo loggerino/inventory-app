@@ -46,9 +46,13 @@ exports.itemCreatePost = [
     body("category", "Price must be a valid number").trim().isLength({ min: 1 }).escape(),
     body("brand", "Price must be a valid number").trim().isLength({ min: 1 }).escape(),
     body("stock", "Stock must be a valid number").isNumeric(),
-    body("image", "Must be valid image").trim().optional(),
+    body("image", "Must be valid image").trim().optional({ values: "falsy" }),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
+        let imageName = '';
+        if (req.file) {
+            imageName = req.file.filename;
+        }
         const item = new Item({
             name: req.body.name,
             description: req.body.description,
@@ -56,7 +60,7 @@ exports.itemCreatePost = [
             category: req.body.category,
             brand: req.body.brand,
             stock: req.body.stock,
-            image: req.file.filename,
+            image: imageName,
             _id: req.params.id,
         });
         if (!errors.isEmpty()) {
@@ -106,9 +110,13 @@ exports.itemUpdatePost = [
     body("category", "Category must be selected").trim().isLength({ min: 1 }).escape(),
     body("brand", "Brand must be selected").trim().isLength({ min: 1 }).escape(),
     body("stock", "Stock must be a valid number").isNumeric(),
-    body("image", "Must be valid image").trim().optional({ checkFalsy: true }),
+    body("image", "Must be valid image").trim().optional({ values: "falsy" }),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
+        let imageName = '';
+        if (req.file) {
+            imageName = req.file.filename;
+        }
         const item = new Item({
             name: req.body.name,
             description: req.body.description,
@@ -116,7 +124,7 @@ exports.itemUpdatePost = [
             category: req.body.category,
             brand: req.body.brand,
             stock: req.body.stock,
-            image: req.file.filename,
+            image: imageName,
             _id: req.params.id,
         });
 
