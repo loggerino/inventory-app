@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Are you sure you want to delete the following item?
+  dl
+    dt Item Name:
+    dd #{item.name}
+    dt Description:
+    dd #{item.description}
+    dt Price:
+    dd #{item.price}
+    dt Stock:
+    dd #{item.stock}
+  form(method='POST', action=item.url + '/delete')
+    button.btn.btn-danger(type='submit') Delete Item

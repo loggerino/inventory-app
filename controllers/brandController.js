@@ -87,7 +87,7 @@ exports.brandUpdatePost = [
         });
         if (!errors.isEmpty()) {
             res.render("brand_form", {
-                title: "Create New Brand",
+                title: "Update Brand",
                 brand: brand,
             });
             return;
