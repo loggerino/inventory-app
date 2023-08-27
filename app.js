@@ -62,7 +62,7 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(session({ secret: "cats", resave: true, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
