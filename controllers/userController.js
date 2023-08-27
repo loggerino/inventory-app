@@ -27,3 +27,10 @@ exports.loginPost = (req, res) => {
 exports.logoutGet = (req, res) => {
     res.render('logout', { title: 'Logout' });
 };
+
+exports.isAdmin = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/authentication/login');
+};
